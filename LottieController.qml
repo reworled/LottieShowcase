@@ -18,7 +18,7 @@ Item {
         width: parent.width
         from: lottie.startFrame
         to: lottie.endFrame
-        onValueChanged: lottie.gotoAndStop(value)
+        onValueChanged: lottie.gotoAndStop(Math.round(value))
         // Current version of QtLottie doesn't expose the frame number.
         // set the slider straight back to 0. TODO connect it up better
         // to move with the animation.
@@ -40,8 +40,7 @@ Item {
             width: 50
             text: "\u25B6"
             onClicked: {
-                var where = checkBox.checked ? lottie.endFrame : 0
-                lottie.gotoAndPlay(where)
+                lottie.gotoAndPlay(0)
             }
         }
         Button {
@@ -67,6 +66,10 @@ Item {
         ComboBox {
             model: ["black", "white"]
             onCurrentTextChanged: changeBackgroundColor(currentText)
+        }
+        Text {
+            visible: 0 !== slider.value
+            text: qsTr("Frame: ") + Math.round(slider.value) + "/" + lottie.endFrame
         }
     }
 }

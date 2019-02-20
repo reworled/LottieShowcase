@@ -55,6 +55,8 @@ RowLayout {
                     quality: LottieAnimation.HighQuality
                     autoPlay: false
                     loops: 1
+                    // Animation 'Loading Checkmark' by Baris
+                    // from https://lottiefiles.com/4319-first-lottie
                     source: ":/4319-first-lottie.json"
                     Connections {
                         target: finder

@@ -19,6 +19,15 @@ Item {
         from: lottie.startFrame
         to: lottie.endFrame
         onValueChanged: lottie.gotoAndStop(value)
+        // Current version of QtLottie doesn't expose the frame number.
+        // set the slider straight back to 0. TODO connect it up better
+        // to move with the animation.
+        Connections {
+            target: lottie
+            onSourceChanged: {
+                slider.value = 0
+            }
+        }
     }
 
     Row {
@@ -50,22 +59,6 @@ Item {
             validator: IntValidator { bottom: 1; top: 120 }
             text: lottie.frameRate
             onTextEdited: lottie.frameRate = text
-        }
-        Text {
-            text: "Reverse:"
-            anchors.verticalCenter: parent.verticalCenter
-        }
-        CheckBox {
-            id: checkBox
-            checked: lottie.direction === LottieAnimation.Reverse
-            onCheckedChanged: {
-                if (checked) {
-                    lottie.direction = LottieAnimation.Reverse
-                }
-                else {
-                    lottie.direction = LottieAnimation.Forward
-                }
-            }
         }
         Text {
             text: "Background:"

@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>24-toggle-switch.json</file>
+        <file>50-material-loader.json</file>
+        <file>4129-cosmo.json</file>
+        <file>26-lets-have-some-hamburger.json</file>
+        <file>29-motorcycle.json</file>
+        <file>33-video-cam.json</file>
+        <file>48-progress-bar.json</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>JsonFileComboManager.qml</file>
+        <file>LottieController.qml</file>
+        <file>4319-first-lottie.json</file>
+    </qresource>
+</RCC>

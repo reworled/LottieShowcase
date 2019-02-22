@@ -1,5 +1,6 @@
 #include "jsonfinder.h"
 
+#include <QFile>
 #include <QSettings>
 
 JSONFinder::JSONFinder(QObject *parent) : QObject(parent)
@@ -12,6 +13,14 @@ JSONFinder::JSONFinder(QObject *parent) : QObject(parent)
     scan();
 }
 
+void JSONFinder::deleteFile(QString filename)
+{
+    QFile f(m_dir.absolutePath() + QDir::separator() + filename);
+    if (f.exists())
+    {
+        f.remove();
+    }
+}
 
 void JSONFinder::scan()
 {

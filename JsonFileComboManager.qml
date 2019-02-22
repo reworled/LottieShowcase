@@ -20,7 +20,7 @@ RowLayout {
     //            finder.scan()
     //        }
     //    }
-    Item{
+    Item {
         Layout.fillWidth: true
         Layout.fillHeight: true
         Column {
@@ -41,37 +41,78 @@ RowLayout {
                     onClicked: fileDialog.open()
                 }
             }
-            ComboBox {
-                anchors.right: parent.right
-                width: parent.width/1.5
-                model: finder.model
-                onCurrentTextChanged: {
-                    root.fileSelected(currentText)
-                }
-                LottieAnimation {
-                    id: tickAnimation
-                    anchors.centerIn: parent
-                    scale: 0.25
-                    quality: LottieAnimation.HighQuality
-                    autoPlay: false
-                    loops: 1
-                    // Animation 'Loading Checkmark' by Baris
-                    // from https://lottiefiles.com/4319-first-lottie
-                    source: ":/4319-first-lottie.json"
-                    Connections {
-                        target: finder
-                        onModelChanged: {
-                            tickAnimation.gotoAndPlay(0)
-                            animationHideTimer.start()
+            Item {
+                width: parent.width
+                height: parent.height/2
+                Item {
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    height: parent.height
+                    width: parent.width * 0.3
+                    Text {
+                        id: deleteText
+                        anchors.centerIn: parent
+                        text: qsTr("Delete")
+                    }
+
+                    LottieAnimation {
+                        id: deleteAnimation
+                        anchors.centerIn: parent
+                        scale: 0.5
+                        autoPlay: false
+                        // Animation 'Error Cross' by Rodrigo Bernardi
+                        // from https://lottiefiles.com/3932-error-cross
+                        source: ":/3932-error-cross.json"
+                        onFinished: {
+                            deleteText.visible = true
+                            gotoAndStop(0)
                         }
                     }
-                    Timer {
-                        id: animationHideTimer
-                        interval: 2200
-                        onTriggered: tickAnimation.gotoAndStop(0)
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            finder.deleteFile(comboBox.currentText)
+                            deleteText.visible = false
+                            deleteAnimation.gotoAndPlay(0)
+                        }
+                    }
+
+                }
+
+                ComboBox {
+                    id: comboBox
+                    anchors.right: parent.right
+                    width: parent.width/1.5
+                    model: finder.model
+                    onCurrentTextChanged: {
+                        root.fileSelected(currentText)
+                    }
+                    LottieAnimation {
+                        id: tickAnimation
+                        anchors.centerIn: parent
+                        scale: 0.25
+                        quality: LottieAnimation.HighQuality
+                        autoPlay: false
+                        loops: 1
+                        // Animation 'Loading Checkmark' by Baris
+                        // from https://lottiefiles.com/4319-first-lottie
+                        source: ":/4319-first-lottie.json"
+                        Connections {
+                            target: finder
+                            onModelChanged: {
+                                tickAnimation.gotoAndPlay(0)
+                                animationHideTimer.start()
+                            }
+                        }
+                        Timer {
+                            id: animationHideTimer
+                            interval: 2200
+                            onTriggered: tickAnimation.gotoAndStop(0)
+                        }
                     }
                 }
             }
+
         }
     }
 

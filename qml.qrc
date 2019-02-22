@@ -4,5 +4,6 @@
         <file>JsonFileComboManager.qml</file>
         <file>LottieController.qml</file>
         <file>4319-first-lottie.json</file>
+        <file>3932-error-cross.json</file>
     </qresource>
 </RCC>
